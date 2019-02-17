@@ -10,7 +10,7 @@ namespace fighting_game_01
     {
         static void Main(string[] args)
         {
-
+            //
             Console.WriteLine("Enter your name: ");
 
             string playerName = Console.ReadLine();
@@ -91,12 +91,12 @@ namespace fighting_game_01
 
 
         //Initialiser
-        public static void createPlayer(string n)
-        {
-            var player = new Fighter(n, 100, 20);
+        //public static void createPlayer(string n)
+        //{
+        //    var player = new Fighter(n, 100, 20);
 
-            Console.WriteLine($"Name: {player.Name}\nHealth: {player.Health}\nAttack power: {player.AttackPower}");
-        }
+        //    Console.WriteLine($"Name: {player.Name}\nHealth: {player.Health}\nAttack power: {player.AttackPower}");
+        //}
 
 
         public static void startGame(string n)
@@ -120,6 +120,8 @@ namespace fighting_game_01
                 {
                     case 'a':
                         player.attack();
+                        //Call to computer actions functions here
+                        //Update player status afterwards
                         break;
 
                     case 'b':
