@@ -10,25 +10,16 @@ namespace fighting_game_01
     {
         static void Main(string[] args)
         {
-            //
-            Console.WriteLine("Enter your name: ");
+            
+            Console.WriteLine("Enter your name to start the game: ");
 
             string playerName = Console.ReadLine();
             Console.WriteLine("Stats\n");
-
-            //createPlayer(playerName);
-
             startGame(playerName);
 
-            
-            
-
-
-
-
         }
-
-        class Fighter : IMoveSet 
+        //Player class
+        class Fighter //: IMoveSet 
         {
             string name;
             int health;
@@ -52,32 +43,60 @@ namespace fighting_game_01
 
             //Player action methods
 
-            public virtual void attack()
+            public virtual int attack(int pAttack, int eMove, int eAttack, int eHealth)
             {
+
                 this.CurrentMove = 0;
-                //Console.WriteLine($"\nYou inflicted {this.AttackPower} damage");
+                if(eMove == this.CurrentMove)
+                {
+                    this.Health -= eAttack;
+                    
+                }
+                else if(eMove == this.CurrentMove + 1)
+                {
+                    this.AttackPower -= 5;
+                }
+                else
+                {
+                    eHealth -= this.AttackPower;
+                    //eHealth -= pAttack;
+                }
+
                 Console.WriteLine("\nYou attacked");
-                //Testing current move value
-                //Console.WriteLine(currentMove);
-                
+                return eHealth;
             }
 
-            public virtual void block()
+            public virtual void block(int eMove, int eAttack)
             {
                 this.CurrentMove = 1;
+
+                if(eMove == this.CurrentMove - 1)
+                {
+                    eAttack -= 5;
+                }
                 Console.WriteLine("\nYou blocked");
             }
 
-            public virtual void chargeAttack()
+            public virtual void chargeAttack(int eMove, int eAttack)
             {
                 this.CurrentMove = 2;
-                Console.WriteLine("\nYou charged your attack power");
+                
                 this.AttackPower += 10;
+
+                if (eMove == this.CurrentMove - 2)
+                {
+                    this.Health -= eAttack;
+                }
+                Console.WriteLine("\nYou charged your attack power");
             }
 
-            public virtual void heal()
+            public virtual void heal(int eMove, int eAttack)
             {
                 this.CurrentMove = 3;
+                if (eMove == this.CurrentMove - 2)
+                {
+                    this.Health -= eAttack;
+                }
                 Console.WriteLine("\nYou healed");
                 this.Health += 20;
             }
@@ -100,237 +119,246 @@ namespace fighting_game_01
                 this.AttackPower = attackPower;
             }
 
-            public override void attack()
+           
+            public override int attack(int eAttack, int pMove, int pAttack, int pHealth)
             {
+
+                this.CurrentMove = 0;
+                if (pMove == this.CurrentMove)
+                {
+                    this.Health -= pAttack;
+
+                }
+                else if (pMove == this.CurrentMove + 1)
+                {
+                    this.AttackPower -= 5;
+                }                
+                else
+                {
+                    pHealth -= this.AttackPower;
+                }
+                
                 Console.WriteLine("Enemy attacked");
+                return pHealth;
+            }
+            //public override void block()
+            //{
+            //    Console.WriteLine("Enemy blocked");
+            //}
+
+            public override void block(int pMove, int pAttack)
+            {
+                this.CurrentMove = 1;
+
+                if (pMove == this.CurrentMove - 1)
+                {
+                    pAttack -= 5;
+                }
+                Console.WriteLine("\nEnemy blocked");
             }
 
-            public override void block()
+            //public override void chargeAttack()
+            //{
+            //    Console.WriteLine("Enemy charged attack");
+            //    this.AttackPower += 20;
+            //}
+
+            //public override void heal()
+            //{
+            //    Console.WriteLine("Enemy healed");
+            //    this.Health += 20;
+            //}
+
+            public override void chargeAttack(int pMove, int pAttack)
             {
-                Console.WriteLine("Enemy blocked");
+                this.CurrentMove = 2;
+
+                this.AttackPower += 10;
+
+                if (pMove == this.CurrentMove - 2)
+                {
+                    this.Health -= pAttack;
+                }
+                Console.WriteLine("\nYou charged your attack power");
             }
 
-            public override void chargeAttack()
+            public override void heal(int pMove, int pAttack)
             {
-                Console.WriteLine("Enemy charged attack");
-                this.AttackPower += 20;
-            }
-
-            public override void heal()
-            {
-                Console.WriteLine("Enemy healed");
+                this.CurrentMove = 3;
+                if (pMove == this.CurrentMove - 2)
+                {
+                    this.Health -= pAttack;
+                }
+                Console.WriteLine("\nYou healed");
                 this.Health += 20;
             }
 
 
 
-
-
-
         }
 
-        interface IMoveSet
-        {
-            void attack();
-            void block();
-            void chargeAttack();
-            void heal();
-        }
+        //interface IMoveSet
+        //{
+        //    void attack();
+        //    void block();
+        //    void chargeAttack();
+        //    void heal();
+        //}
 
 
 
 
         //Initialiser
-        //public static void createPlayer(string n)
-        //{
-        //    var player = new Fighter(n, 100, 20);
-
-        //    Console.WriteLine($"Name: {player.Name}\nHealth: {player.Health}\nAttack power: {player.AttackPower}");
-        //}
-
-
         public static void startGame(string n)
         {
             var player = new Fighter(n, 100, 20);
             var enemy = new Enemy("Enemy", 100, 20);
+            //var f = new Fight();
+            //Fighter en = new Enemy("En2", 100, 20);
+            //Console.WriteLine("\nEnemy stats");
+            //Console.WriteLine($"\nName: {en.Name}\nHealth: {en.Health}\nAttack power: {en.AttackPower}\n");
             bool gameRunning = true;
             
             Console.WriteLine($"Name: {player.Name}\nHealth: {player.Health}\nAttack power: {player.AttackPower}");
             Console.WriteLine("\nEnemy stats");
             Console.WriteLine($"\nName: {enemy.Name}\nHealth: {enemy.Health}\nAttack power: {enemy.AttackPower}\n");
-
-
             Console.WriteLine("\n\n Choose your move\n");
             Console.WriteLine("a)Attack\nb)Block\nc)Charge attack power\nh)Heal");
 
-           // char userInput = Console.ReadKey().KeyChar;
+            //var pCm = player.CurrentMove;
 
-
-            //while(player.Health > 0)
+   
             while(gameRunning)
             {
                 char userInput = Console.ReadKey().KeyChar;
                 switch (userInput)
                 {
                     case 'a':
-                        player.attack();
-                        
-
                         //Both attack
+                        //player.attack(player.AttackPower, aiMoveSelector(), enemy.AttackPower, enemy.Health);
                         if (player.CurrentMove == aiMoveSelector())
                         {
-                            enemy.attack();
-                            player.Health = player.Health - enemy.AttackPower;
-                            enemy.Health = enemy.Health - player.AttackPower;
+                            player.attack(player.AttackPower, aiMoveSelector(), enemy.AttackPower, enemy.Health);
+                            enemy.attack(enemy.AttackPower, player.CurrentMove, player.AttackPower, player.Health);
                             Console.WriteLine($"Your health: {player.Health}");
                             Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
                         //Player attacks, AI blocks
                         else if (aiMoveSelector() == player.CurrentMove + 1)
                         {
-                            enemy.block();
-                            player.AttackPower -= 5;
-                            Console.WriteLine($"Your attack power went down: {player.AttackPower}");
-
+                            player.attack(player.AttackPower, aiMoveSelector(), enemy.AttackPower, enemy.Health);
+                            enemy.block(player.CurrentMove, player.AttackPower);
+                            Console.WriteLine($"Your attack power decresed to: {player.AttackPower}");
+                            
                         }
-                        //Player attacks, AI charges attack
-                        else if(aiMoveSelector() == player.CurrentMove + 2)
+                        //Player attacks, AI charges
+                        else if (aiMoveSelector() == player.CurrentMove + 2)
                         {
-                            enemy.chargeAttack();
-                            enemy.Health = enemy.Health - player.AttackPower;
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            player.attack(player.AttackPower, aiMoveSelector(), enemy.AttackPower, enemy.Health);
+                            enemy.chargeAttack(player.CurrentMove, player.AttackPower);
+                           // Console.WriteLine(enemy.Health);
+                            Console.WriteLine($"Enemy attack power increase to: {enemy.AttackPower}");
                         }
                         //Player attacks, AI heals
-                        else
+                        else if (aiMoveSelector() == player.CurrentMove + 3)
                         {
-                            enemy.heal();
-                            enemy.Health = enemy.Health - player.AttackPower;
-                            Console.WriteLine($"Your health: {player.Health}");
+                            player.attack(player.AttackPower, aiMoveSelector(), enemy.AttackPower, enemy.Health);
+                            enemy.heal(player.CurrentMove, player.AttackPower);
                             Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
-                        
-                        break;
+                            break;
 
                     case 'b':
-                        player.block();
-
                         //Both block
                         if (player.CurrentMove == aiMoveSelector())
                         {
-                            enemy.block();
-                            
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            player.block(aiMoveSelector(), enemy.AttackPower);
+                            enemy.block(player.CurrentMove, player.AttackPower);
                         }
-                        //Player blocks, AI attacks
+                        //Player blocks, enemy attacks
                         else if (aiMoveSelector() == player.CurrentMove - 1)
                         {
-                            enemy.attack();
-                            enemy.AttackPower -= 5;
-                            Console.WriteLine($"Enemies attack power went down: {enemy.AttackPower}");
-
+                            player.block(aiMoveSelector(), enemy.AttackPower);
+                            enemy.attack(enemy.AttackPower, player.CurrentMove, player.AttackPower, player.Health);
+                            Console.WriteLine($"Enemy attack power decresed to: {enemy.AttackPower}");
                         }
-                        //Player blocks, AI charges attack
+                        //Player blocks, enemy charges
                         else if (aiMoveSelector() == player.CurrentMove + 1)
                         {
-                            enemy.chargeAttack();
-                            Console.WriteLine($"Enemy attack power went up: {enemy.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            player.block(aiMoveSelector(), enemy.AttackPower);
+                            enemy.chargeAttack(player.CurrentMove, player.AttackPower);
+                            Console.WriteLine($"Enemy attack power increased to: {enemy.AttackPower}");
                         }
-                        //Player blocks, AI heals
-                        else
+                        //Player blocks, enemy heals
+                        else if (aiMoveSelector() == player.CurrentMove + 2)
                         {
-                            enemy.heal();
-                            
-                            Console.WriteLine($"Your health: {player.Health}");
+                            player.block(aiMoveSelector(), enemy.AttackPower);
+                            enemy.heal(player.CurrentMove, player.AttackPower);
                             Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
                         break;
 
                     case 'c':
-                        player.chargeAttack();
-                        // Console.WriteLine($"Your attack power is: {player.AttackPower}");
 
-                        //Both charge attack
+                        //Both charge
+                        player.chargeAttack(enemy.CurrentMove, enemy.AttackPower);
+                        Console.WriteLine($"Player attack increased to: {player.AttackPower}");
                         if (player.CurrentMove == aiMoveSelector())
                         {
-                            enemy.chargeAttack();
+                            enemy.chargeAttack(player.CurrentMove, player.AttackPower);
+                            Console.WriteLine($"Enemy attack increased to: {enemy.AttackPower}");
+                            //Console.WriteLine($"Your attack power increased to: {player.AttackPower}");
 
-                            Console.WriteLine($"Enemy attack power went up: {enemy.AttackPower}");
-                            Console.WriteLine($"Your attack power went up: {player.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
-                        //Player charges, AI attacks
-                        else if (aiMoveSelector() == player.CurrentMove - 2)
+                        //Player charges, enemy attacks
+                        else if(aiMoveSelector() == player.CurrentMove - 2)
                         {
-                            enemy.attack();
-                            player.Health -= enemy.AttackPower;
-                            Console.WriteLine($"Your attack attack power went up: {player.AttackPower}");
+                            enemy.attack(enemy.AttackPower, player.CurrentMove, player.AttackPower, player.Health);
+                            //Console.WriteLine($"Your attack power increased to: {player.AttackPower}");
                             Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
-
                         }
-                        //Player charges, AI blocks
+                        //Player charges, enemy blocks
+                        else if (aiMoveSelector() == player.CurrentMove - 1)
+                        {
+                            enemy.block(player.CurrentMove, player.AttackPower);
+                           // Console.WriteLine($"Your attack power increased to: {player.AttackPower}");
+                        }
+                        //Player charges, enemy heals
                         else if (aiMoveSelector() == player.CurrentMove + 1)
                         {
-                            enemy.block();
-
-                            Console.WriteLine($"Your attack attack power went up: {player.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
-                        }
-                        //Player charges, AI heals
-                        else
-                        {
-                            enemy.heal();
-                            Console.WriteLine($"Your attack attack power went up: {player.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
+                            enemy.heal(enemy.CurrentMove, enemy.AttackPower);
+                           // Console.WriteLine($"Enemy attack increased to: {enemy.AttackPower}");
                             Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
                         break;
 
                     case 'h':
-                        player.heal();
-                        //Console.WriteLine($"Your health is: {player.Health}");
 
                         //Both heal
-                        if (player.CurrentMove == aiMoveSelector())
+                        player.heal(enemy.CurrentMove, enemy.AttackPower);
+                        Console.WriteLine($"Your health: {player.Health}");
+                        if (aiMoveSelector() == player.CurrentMove)
                         {
-                            enemy.heal();
-
-                            
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            enemy.heal(player.CurrentMove, player.AttackPower);
+                            //Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
-                        //Player heal, AI attacks
+                        //Player heals, enemy attacks
                         else if (aiMoveSelector() == player.CurrentMove - 3)
                         {
-                            enemy.attack();
-                            player.Health -= enemy.AttackPower;
-
+                            enemy.attack(enemy.AttackPower, player.CurrentMove, player.AttackPower, player.Health);
+                            //Console.WriteLine($"Your attack power increased to: {player.AttackPower}");
                             Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
-
                         }
-                        //Player charges, AI blocks
-                        else if (aiMoveSelector() == player.CurrentMove + 1)
+                        //Player heals, enemy blocks
+                        else if(aiMoveSelector() == player.CurrentMove - 2)
                         {
-                            enemy.block();
-
-                            Console.WriteLine($"Your attack attack power went up: {player.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            Console.WriteLine("Enemy blocks");
                         }
-                        //Player charges, AI heals
+                        //Player heals, enemy charges
                         else
                         {
-                            enemy.heal();
-                            Console.WriteLine($"Your attack attack power went up: {player.AttackPower}");
-                            Console.WriteLine($"Your health: {player.Health}");
-                            Console.WriteLine($"Enemy health: {enemy.Health}");
+                            enemy.chargeAttack(player.CurrentMove, player.AttackPower);
+                            Console.WriteLine($"Enemy attack increased to: {enemy.AttackPower}");
                         }
                         break;
                 }
@@ -351,10 +379,34 @@ namespace fighting_game_01
             
         }
 
-        public static int aiMoveSelector()
+        //public static void bothAttack(int pHealth, int pAttack, int eHealth, int eAttack)
+        //{
+        //    pHealth -= eAttack;
+        //    eHealth -= pAttack;
+        //    Console.WriteLine($"Your health: {pHealth}");
+        //    Console.WriteLine($"Enemy health: {eHealth}");
+
+
+        //}
+
+        //public Fighter BothAttack(Fighter p)
+        //{
+
+
+        //    return p;
+        //}
+
+
+
+
+
+        public static void pAttackEblock(int pAttack)
         {
-            //Random function to decide move
-            //Number chosen from random is decides on move function
+
+        }
+
+        public static int aiMoveSelector()
+        { 
 
             Random rnd = new Random();
 
