@@ -9,13 +9,10 @@ namespace fighting_game_01
     class Program
     {
         static void Main(string[] args)
-        {
-            
+        {           
             Console.WriteLine("Enter your name to start the game: ");
-
             string playerName = Console.ReadLine();
             startGame(playerName);
-
         }
         //Player class
         class Fighter 
@@ -187,12 +184,15 @@ namespace fighting_game_01
             bool gameRunning = true;
 
             displayStats(player.Name, player.Health, player.AttackPower, enemy.Name, enemy.Health, enemy.AttackPower);
+            Console.WriteLine("\nThe fight begins!");
             Console.WriteLine("\n\n Choose your move\n");
-            Console.WriteLine("a)Attack\nb)Block\nc)Charge attack power\nh)Heal\ns)Display stats");
+            //Console.WriteLine("a)Attack\nb)Block\nc)Charge attack power\nh)Heal\ns)Display stats");
  
             while(gameRunning)
             {
+                Console.WriteLine("\na)Attack\nb)Block\nc)Charge attack power\nh)Heal\ns)Display stats\n");
                 char userInput = Console.ReadKey().KeyChar;
+                
                 switch (userInput)
                 {
                     case 'a':
@@ -315,14 +315,19 @@ namespace fighting_game_01
                         displayStats(player.Name, player.Health, player.AttackPower, enemy.Name, enemy.Health, enemy.AttackPower);
                         break;
 
+                    default:
+                        Console.WriteLine("\nIncorrect input");
+                        break;
+  
+
                 }
 
-                if(player.Health < 0)
+                if(player.Health <= 0)
                 {
                     gameRunning = false;
                     Console.WriteLine("\n\nYou lose");
                 }
-                else if(enemy.Health < 0)
+                else if(enemy.Health <= 0)
                 {
                     gameRunning = false;
                     Console.WriteLine("\n\nYou win");
@@ -333,16 +338,15 @@ namespace fighting_game_01
             
         }
 
+        //Select enemy move value
         public static int aiMoveSelector()
         { 
-
             Random rnd = new Random();
-
             int randomMoveVal = rnd.Next(0, 4);
-
             return randomMoveVal;
         }
 
+        //Shows stats
         public static void displayStats(string pName, int pHealth, int pAttack, string eName, int eHealth, int eAttack)
         {
             Console.WriteLine("Your stats\n");
