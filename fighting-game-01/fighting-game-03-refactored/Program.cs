@@ -10,10 +10,6 @@ namespace fighting_game_03_refactored
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Enter your name to start the game: ");
-            //string playerName = Console.ReadLine();
-            //startGame(playerName);
-
             var game = new Game();
             game.start();
         }
@@ -111,11 +107,8 @@ namespace fighting_game_03_refactored
                 this.Health = health;
                 this.AttackPower = attackPower;
             }
-
-
             public override int attack(int eAttack, int pMove, int pAttack, int pHealth)
             {
-
                 this.CurrentMove = 0;
                 if (pMove == this.CurrentMove)
                 {
@@ -135,7 +128,6 @@ namespace fighting_game_03_refactored
                 return pHealth;
             }
 
-
             public override void block(int pMove, int pAttack)
             {
                 this.CurrentMove = 1;
@@ -147,13 +139,10 @@ namespace fighting_game_03_refactored
                 Console.WriteLine("\nEnemy blocked");
             }
 
-
             public override void chargeAttack(int pMove, int pAttack)
             {
                 this.CurrentMove = 2;
-
                 this.AttackPower += 10;
-
                 if (pMove == this.CurrentMove - 2)
                 {
                     this.Health -= pAttack;
@@ -180,11 +169,9 @@ namespace fighting_game_03_refactored
             }
         }
 
-
         //Game class
         class Game
         {
-            //Fighter player = new Fighter(n, 100, 20);
             Enemy enemy = new Enemy("Enemy", 100, 20);
             bool gameRunning = true;
 
@@ -355,30 +342,7 @@ namespace fighting_game_03_refactored
                 Console.WriteLine("\nEnemy stats");
                 Console.WriteLine($"\nName: {eName}\nHealth: {eHealth}\nAttack power: {eAttack}\n");
             }
-
-
-
-
-        }
-        //Initialiser
-        
-
-        //Select enemy move value
-        //public static int aiMoveSelector()
-        //{
-        //    Random rnd = new Random();
-        //    int randomMoveVal = rnd.Next(0, 4);
-        //    return randomMoveVal;
-        //}
-
-        //Shows stats
-        //public static void displayStats(string pName, int pHealth, int pAttack, string eName, int eHealth, int eAttack)
-        //{
-        //    Console.WriteLine("Your stats\n");
-        //    Console.WriteLine($"Name: {pName}\nHealth: {pHealth}\nAttack power: {pAttack}");
-        //    Console.WriteLine("\nEnemy stats");
-        //    Console.WriteLine($"\nName: {eName}\nHealth: {eHealth}\nAttack power: {eAttack}\n");
-        //}
+        }        
     }
 }
 

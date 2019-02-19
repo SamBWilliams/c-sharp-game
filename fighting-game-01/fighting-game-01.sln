@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting-game-02-character-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting-game-03-refactored", "fighting-game-03-refactored\fighting-game-03-refactored.csproj", "{513D37E8-4A1D-425D-9B23-69B32F53400F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting_game_04_WPF", "fighting_game_04_WPF\fighting_game_04_WPF.csproj", "{97D583DC-082D-4DCA-8250-4A42C1DE375B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
