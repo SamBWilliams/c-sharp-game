@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fighting_game_01
+namespace fighting_game_02_character_creation
 {
     class Program
     {
         static void Main(string[] args)
-        {           
+        {
             Console.WriteLine("Enter your name to start the game: ");
             string playerName = Console.ReadLine();
             startGame(playerName);
         }
         //Player class
-        class Fighter 
+        class Fighter
         {
             string name;
             int health;
@@ -23,11 +23,11 @@ namespace fighting_game_01
             int currentMove;
 
             public string Name { get; set; }
-            public int Health { get; set; }
+            public int Health { get; set; } //Set contraint so attack power doesnt go below 0
             public int AttackPower { get; set; }
             public int CurrentMove { get; set; }
 
-            public Fighter() {}
+            public Fighter() { }
 
             public Fighter(string name, int health, int attackPower)
             {
@@ -40,12 +40,12 @@ namespace fighting_game_01
             public virtual int attack(int pAttack, int eMove, int eAttack, int eHealth)
             {
                 this.CurrentMove = 0;
-                if(eMove == this.CurrentMove)
+                if (eMove == this.CurrentMove)
                 {
                     this.Health -= eAttack;
-                    
+
                 }
-                else if(eMove == this.CurrentMove + 1)
+                else if (eMove == this.CurrentMove + 1)
                 {
                     this.AttackPower -= 5;
                 }
@@ -61,7 +61,7 @@ namespace fighting_game_01
             {
                 this.CurrentMove = 1;
 
-                if(eMove == this.CurrentMove - 1)
+                if (eMove == this.CurrentMove - 1)
                 {
                     eAttack -= 5;
                 }
@@ -70,7 +70,7 @@ namespace fighting_game_01
 
             public virtual void chargeAttack(int eMove, int eAttack)
             {
-                this.CurrentMove = 2;        
+                this.CurrentMove = 2;
                 this.AttackPower += 10;
 
                 if (eMove == this.CurrentMove - 2)
@@ -109,7 +109,7 @@ namespace fighting_game_01
                 this.AttackPower = attackPower;
             }
 
-           
+
             public override int attack(int eAttack, int pMove, int pAttack, int pHealth)
             {
 
@@ -122,16 +122,16 @@ namespace fighting_game_01
                 else if (pMove == this.CurrentMove + 1)
                 {
                     this.AttackPower -= 5;
-                }                
+                }
                 else
                 {
                     pHealth -= this.AttackPower;
                 }
-                
+
                 Console.WriteLine("Enemy attacked");
                 return pHealth;
             }
-            
+
 
             public override void block(int pMove, int pAttack)
             {
@@ -170,24 +170,200 @@ namespace fighting_game_01
             }
         }
 
+        //Assassin
+        class Assasin : Fighter
+        {
+            int health = 80;
+            int attackPower = 40;
+
+
+            public string Name { get; set; }
+            //public int Health { get; set; }
+            public int AttackPower { get; set; }
+            public int CurrentMove { get; set; }
+            public int Health { get => health; set => health = value; }
+
+            public Assasin() { }
+
+            public Assasin(string name)
+            {
+                this.Name = name;
+            }
+
+            public Assasin(string name, int health, int attackPower)
+            {
+                this.Name = name;
+                this.Health = health;
+                this.AttackPower = attackPower;
+            }
+
+
+            public override int attack(int eAttack, int pMove, int pAttack, int pHealth)
+            {
+
+                this.CurrentMove = 0;
+                if (pMove == this.CurrentMove)
+                {
+                    this.Health -= pAttack;
+
+                }
+                else if (pMove == this.CurrentMove + 1)
+                {
+                    this.AttackPower -= 5;
+                }
+                else
+                {
+                    pHealth -= this.AttackPower;
+                }
+
+                Console.WriteLine("Enemy attacked");
+                return pHealth;
+            }
+
+
+            public override void block(int pMove, int pAttack)
+            {
+                this.CurrentMove = 1;
+
+                if (pMove == this.CurrentMove - 1)
+                {
+                    pAttack -= 5;
+                    this.Health -= 5;
+                }
+                Console.WriteLine("\nEnemy blocked");
+            }
+
+
+            public override void chargeAttack(int pMove, int pAttack)
+            {
+                this.CurrentMove = 2;
+
+                this.AttackPower += 20;
+
+                if (pMove == this.CurrentMove - 2)
+                {
+                    this.Health -= pAttack;
+                }
+                Console.WriteLine("\nEnemy charged their attack power");
+            }
+
+            public override void heal(int pMove, int pAttack)
+            {
+                this.CurrentMove = 3;
+                if (pMove == this.CurrentMove - 3)
+                {
+                    this.Health -= pAttack;
+                }
+                Console.WriteLine("Enemy healed");
+                this.Health += 15;
+            }
+        }
+
+        //Character creator
+        //public static Assasin charCreator(string n, int classType)
+        //{
+        //    var assasin = new Assasin(n);
+
+        //    return assasin;
+        //}
+
+        class CharCreator
+        {
+            public Assasin creator(string n, int classType)
+            {
+                var assasin = new Assasin(n);
+
+                return assasin;
+            }
+        }
+
+        class Game
+        {
+
+
+
+            public static void startGame()
+            {
+
+            }
+
+            public static void charCreator(string n, int classType)
+            {
+                Console.WriteLine("Enter a name");
+                string playerName2 = Console.ReadLine();
+                Console.WriteLine("Choose your class");
+                Console.WriteLine("1)Assasin\n2)Knight\n3)Mage\n");
+                string playerClass = Console.ReadLine();
+
+                //var p1 = new Fighter(n, 1, 1);
+                if (playerClass == "1")
+                {
+                    var p1 = new Assasin(playerName2);
+                    Console.WriteLine($"Health is: {p1.Health}");
+                }
+                else if (playerClass == "2")
+                {
+                    var p1 = new Fighter(playerName2, 100, 20);
+                    Console.WriteLine($"Health is: {p1.Health}");
+                }
+
+
+
+
+
+            }
+
+
+
+        }
+
         //Initialiser
         public static void startGame(string n)
-        {
+        {           
+            //int classChoser = 1;
+            //CharCreator c = new CharCreator();
+            //Console.WriteLine("Enter a name");
+            //string playerName = Console.ReadLine();
+            //c.creator(playerName, classChoser);
+
+            //Return usuable object
+
+
+            //Trying this way
+            Console.WriteLine("Enter a name");
+            string playerName2 = Console.ReadLine();
+            Console.WriteLine("Choose your class");
+            Console.WriteLine("1)Assasin\n2)Knight\n3)Mage\n");
+            string playerClass = Console.ReadLine();
+
+            //var p1 = new Fighter(n, 1, 1);
+            if (playerClass == "1")
+            {
+                var p1 = new Assasin(playerName2);
+                Console.WriteLine($"Health is: {p1.Health}");
+            }
+            else if (playerClass == "2")
+            {
+                var p1 = new Fighter(playerName2, 100, 20);
+                Console.WriteLine($"Health is: {p1.Health}");
+            }
+
+            //charCreator(playerName, classChoser);
+            bool gameRunning = true;
             var player = new Fighter(n, 100, 20);
             var enemy = new Enemy("Enemy", 100, 20);
-            bool gameRunning = true;
 
             displayStats(player.Name, player.Health, player.AttackPower, enemy.Name, enemy.Health, enemy.AttackPower);
             Console.WriteLine("\nThe fight begins!");
             Console.WriteLine("\n\n Choose your move\n");
             //Console.WriteLine("a)Attack\nb)Block\nc)Charge attack power\nh)Heal\ns)Display stats");
- 
+
             //Fight
-            while(gameRunning)
+            while (gameRunning)
             {
                 Console.WriteLine("\na)Attack\nb)Block\nc)Charge attack power\nh)Heal\ns)Display stats\n");
                 char userInput = Console.ReadKey().KeyChar;
-                
+
                 switch (userInput)
                 {
                     case 'a':
@@ -201,7 +377,7 @@ namespace fighting_game_01
                         }
                         //Player attacks, AI blocks
                         else if (aiMoveSelector() == player.CurrentMove + 1)
-                        {                           
+                        {
                             enemy.block(player.CurrentMove, player.AttackPower);
                             Console.WriteLine($"Your attack power decresed to: {player.AttackPower}");
                             Console.WriteLine($"Enemy health: {enemy.Health}");
@@ -219,7 +395,7 @@ namespace fighting_game_01
                             enemy.heal(player.CurrentMove, player.AttackPower);
                             Console.WriteLine($"Enemy health: {enemy.Health}");
                         }
-                            break;
+                        break;
 
                     case 'b':
                         //Both block
@@ -259,7 +435,7 @@ namespace fighting_game_01
                             Console.WriteLine($"Enemy attack increased to: {enemy.AttackPower}");
                         }
                         //Player charges, enemy attacks
-                        else if(aiMoveSelector() == player.CurrentMove - 2)
+                        else if (aiMoveSelector() == player.CurrentMove - 2)
                         {
                             enemy.attack(enemy.AttackPower, player.CurrentMove, player.AttackPower, player.Health);
                             Console.WriteLine($"Your health: {player.Health}");
@@ -294,7 +470,7 @@ namespace fighting_game_01
                             Console.WriteLine($"Your health: {player.Health}");
                         }
                         //Player heals, enemy blocks
-                        else if(aiMoveSelector() == player.CurrentMove - 2)
+                        else if (aiMoveSelector() == player.CurrentMove - 2)
                         {
                             Console.WriteLine("Enemy blocks");
                         }
@@ -315,22 +491,22 @@ namespace fighting_game_01
                 }
 
                 //Win/Lose condition
-                if(player.Health <= 0)
+                if (player.Health <= 0)
                 {
                     gameRunning = false;
                     Console.WriteLine("\n\nYou lose");
                 }
-                else if(enemy.Health <= 0)
+                else if (enemy.Health <= 0)
                 {
                     gameRunning = false;
                     Console.WriteLine("\n\nYou win");
                 }
-            }            
+            }
         }
 
         //Select enemy move value
         public static int aiMoveSelector()
-        { 
+        {
             Random rnd = new Random();
             int randomMoveVal = rnd.Next(0, 4);
             return randomMoveVal;
@@ -344,5 +520,12 @@ namespace fighting_game_01
             Console.WriteLine("\nEnemy stats");
             Console.WriteLine($"\nName: {eName}\nHealth: {eHealth}\nAttack power: {eAttack}\n");
         }
+
+        //Show original stats
+        //public static void showOgStats(Assasin pName)
+        //{
+
+        //}
     }
 }
+
