@@ -34,6 +34,9 @@
         <Label x:Name="testLab" x:FieldModifier="public" FontSize="50" Content="Attacked" HorizontalAlignment="Left" Margin="359,151,0,0" VerticalAlignment="Top" Height="101" Width="219" Visibility="Hidden"/>
         <ProgressBar x:Name="blueHealth" HorizontalAlignment="Left" Height="10" Margin="81,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
         <ProgressBar x:Name="redHealth" HorizontalAlignment="Left" Height="10" Margin="657,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
+        <Label x:Name="blueAP" Content="Label" HorizontalAlignment="Left" Margin="47,38,0,0" VerticalAlignment="Top" Height="55" Width="46"/>
+        <Label x:Name="blockTest" Content="Label" HorizontalAlignment="Left" Margin="719,104,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="conditionLabel" FontSize="50" Content="DEFEAT" HorizontalAlignment="Left" Margin="331,193,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Hidden"/>
 
     </Grid>
 </Window>
