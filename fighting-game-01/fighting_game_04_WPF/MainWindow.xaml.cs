@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace fighting_game_04_WPF
 {
     /// <summary>
@@ -23,18 +24,13 @@ namespace fighting_game_04_WPF
         Fighter player = new Fighter();
         Enemy enemy = new Enemy();
         Game game = new Game();
-
-
-
+        MediaPlayer mediaPlayer = new MediaPlayer();
 
         public MainWindow()
         {
             InitializeComponent();
-
-            
+  
         }
-
-
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -52,10 +48,10 @@ namespace fighting_game_04_WPF
             blueName.Content = nameText.Text;
 
             blueAP.Content = player.AttackPower;
+            redAP.Content = enemy.AttackPower;
 
 
         }
-
 
         public void AttackBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -69,35 +65,42 @@ namespace fighting_game_04_WPF
                 enemy.Health -= player.AttackPower;
                 blueHealth.Value -= enemy.AttackPower;
                 redHealth.Value -= player.AttackPower;
+                redMove.Content = "Attacks";
             }
             else if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 1)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
                 player.AttackPower -= 5;
                 blueAP.Content = player.AttackPower;
-
+                redMove.Content = "Blocks";
             }
             else if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 2)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
                 redHealth.Value -= player.AttackPower;
                 enemy.AttackPower += 10;
+                redAP.Content = enemy.AttackPower;
+                redMove.Content = "Attack charged";
                 //red ap goes up
             }
             else
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
                 redHealth.Value -= player.AttackPower;
-                enemy.heal();
-                redHealth.Value = enemy.Health;
+                //enemy.heal();
+                redHealth.Value += 20;
+                redMove.Content = "Heals";
             }
 
             winCondition();
+            constraints();
+
+            mediaPlayer.Open(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\sounds\steelsword.mp3", UriKind.Absolute));
+            mediaPlayer.Play();
+
 
         }
-
-        
-
+    
         private void BlockBtn_Click(object sender, RoutedEventArgs e)
         {
             player.CurrentMove = 1;
@@ -107,27 +110,33 @@ namespace fighting_game_04_WPF
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redAttack.png", UriKind.Absolute));
                 enemy.AttackPower -= 5;
                 //red ap goes down
+                redAP.Content = enemy.AttackPower;
+                redMove.Content = "Attack";
             }
             else if (game.checkBlock(player.CurrentMove, enemy.aiMoveSelector()) == 5)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
-                
+                redMove.Content = "Blocks";
 
             }
             else if (game.checkBlock(player.CurrentMove, enemy.aiMoveSelector()) == 6)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
                 enemy.AttackPower += 10;
+                redAP.Content = enemy.AttackPower;
+                redMove.Content = "Attack charged";
                 //red ap goes up
             }
             else
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
-                enemy.heal();
-                redHealth.Value = enemy.Health;
+                //enemy.heal();
+                redHealth.Value += 20;
+                redMove.Content = "Heals";
             }
 
             winCondition();
+            constraints();
         }
 
         private void ChargeBtn_Click(object sender, RoutedEventArgs e)
@@ -140,60 +149,84 @@ namespace fighting_game_04_WPF
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redAttack.png", UriKind.Absolute));
                 player.Health -= enemy.AttackPower;
+                redMove.Content = "Attacks";
             }
             else if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 9)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
-
+                redMove.Content = "Blocks";
             }
             else if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 10)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
                 enemy.AttackPower += 10;
+                redAP.Content = enemy.AttackPower;
+                redMove.Content = "Attack charged";
                 //red ap goes up
             }
             else
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
-                enemy.heal();
-                redHealth.Value = enemy.Health;
+               // enemy.heal();
+                redHealth.Value +=20;
+                redMove.Content = "Heals";
             }
 
             winCondition();
+            constraints();
         }
 
         private void HealBtn_Click(object sender, RoutedEventArgs e)
         {
             player.CurrentMove = 3;
-            player.heal();
-            blueHealth.Value = player.Health;
+            //player.heal();
+            blueHealth.Value += 20;
            
             bluePlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\blueIdel.png", UriKind.Absolute));
             if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 12)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redAttack.png", UriKind.Absolute));
                 player.Health -= enemy.AttackPower;
+                redMove.Content = "Attacks";
             }
             else if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 13)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
-
+                redMove.Content = "Blocks";
             }
             else if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 14)
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
                 enemy.AttackPower += 10;
+                redAP.Content = enemy.AttackPower;
+                redMove.Content = "Attack charged";
                 //red ap goes up
             }
             else
             {
                 redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
-                enemy.heal();
-                redHealth.Value = enemy.Health;
+                //enemy.heal();
+                redHealth.Value += 20;
+                redMove.Content = "Heals";
             }
 
             winCondition();
+            constraints();
 
+        }
+
+        public void collapseElements()
+        {
+            attackBtn.Visibility = Visibility.Collapsed;
+            blockBtn.Visibility = Visibility.Collapsed;
+            chargeBtn.Visibility = Visibility.Collapsed;
+            healBtn.Visibility = Visibility.Collapsed;
+            blueAPlab.Visibility = Visibility.Collapsed;
+            redAPlab.Visibility = Visibility.Collapsed;
+            blueAP.Visibility = Visibility.Collapsed;
+            redAP.Visibility = Visibility.Collapsed;
+            redMove.Visibility = Visibility.Collapsed;
+            refreshBtn.Visibility = Visibility.Visible;
         }
 
         public void winCondition()
@@ -202,154 +235,66 @@ namespace fighting_game_04_WPF
             {
                 conditionLabel.Visibility = Visibility.Visible;
                 conditionLabel.Content = "DEFEAT";
-
+                collapseElements();
             }
             else if (redHealth.Value <= 0)
             {
                 conditionLabel.Visibility = Visibility.Visible;
                 conditionLabel.Content = "WINNER";
+                collapseElements();
+                
+            }
+            else if (blueHealth.Value <=0 && redHealth.Value <= 0)
+            {
+                conditionLabel.Visibility = Visibility.Visible;
+                conditionLabel.Content = "DRAW";
+                collapseElements();
             }
         }
 
-        
+        public void constraints()
+        {
+            if (player.Health > 100) { player.Health = 100; }
+            if (enemy.Health > 100) { enemy.Health = 100; }
+            if (player.AttackPower < 5) { player.AttackPower = 5; }
+            if (enemy.AttackPower < 5) { enemy.AttackPower = 5; }
+        }
 
+        void RefreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //InitializeComponent();
+        }
     }
-
-    
 
     class Fighter
     {
-        string name;
+        
         int health;
         int attackPower;
         int currentMove;
 
-        public string Name { get; set; }
         public int Health { get; set; } = 100;
         public int AttackPower { get; set; } = 20;
         public int CurrentMove { get; set; }
 
         public Fighter() { }
 
-        //public Fighter(string name, int health, int attackPower)
-        //{
-        //    this.Name = name;
-        //    this.Health = health;
-        //    this.AttackPower = attackPower;
-        //}
 
         //Player action methods
-        public virtual /*int*/ void attack(int pAttack, int eMove, int eAttack, int eHealth)
-        {
-            this.CurrentMove = 0;
-            if (eMove == this.CurrentMove)
-            {
-                this.Health -= eAttack;
-
-            }
-            else if (eMove == this.CurrentMove + 1)
-            {
-                this.AttackPower -= 5;
-            }
-            else
-            {
-                eHealth -= this.AttackPower;
-            }
-            
-            //return eHealth;
-        }
-
-        public virtual void block(int eMove, int eAttack)
-        {
-            this.CurrentMove = 1;
-
-            if (eMove == this.CurrentMove - 1)
-            {
-                eAttack -= 5;
-            }
-            
-        }
-
-        public virtual void chargeAttack(int eMove, int eAttack)
-        {
-            this.CurrentMove = 2;
-            this.AttackPower += 10;
-
-            if (eMove == this.CurrentMove - 2)
-            {
-                this.Health -= eAttack;
-            }
-            
-        }
-
-        public virtual void heal()
-        {
-            
-            this.Health += 10;
-        }
+       
     }
 
     class Enemy : Fighter
     {
-        public string Name { get; set; }
-        public int Health { get; set; } = 100;
-        public int AttackPower { get; set; } = 20;
-        public int CurrentMove { get; set; }
+        
+        //public int Health { get; set; } = 100;
+        //public int AttackPower { get; set; } = 20;
+        //public int CurrentMove { get; set; }
 
         public Enemy() { }
 
-        public Enemy(string name, int health, int attackPower)
-        {
-            this.Name = name;
-            this.Health = health;
-            this.AttackPower = attackPower;
-        }
-        public override void attack(int eAttack, int pMove, int pAttack, int pHealth)
-        {
-            this.CurrentMove = 0;
-            if (pMove == this.CurrentMove)
-            {
-                this.Health -= pAttack;
-
-            }
-            else if (pMove == this.CurrentMove + 1)
-            {
-                this.AttackPower -= 5;
-            }
-            else
-            {
-                pHealth -= this.AttackPower;
-            }
-
-            
-        }
-
-        public override void block(int pMove, int pAttack)
-        {
-            this.CurrentMove = 1;
-
-            if (pMove == this.CurrentMove - 1)
-            {
-                pAttack -= 5;
-            }
-            Console.WriteLine("\nEnemy blocked");
-        }
-
-        public override void chargeAttack(int pMove, int pAttack)
-        {
-            this.CurrentMove = 2;
-            this.AttackPower += 10;
-            if (pMove == this.CurrentMove - 2)
-            {
-                this.Health -= pAttack;
-            }
-            Console.WriteLine("\nEnemy charged their attack power");
-        }
-
-        public override void heal()
-        {
-            this.Health += 20;
-        }
+        
+        
 
         public int aiMoveSelector()
         {
@@ -419,29 +364,6 @@ namespace fighting_game_04_WPF
 
     }
         
-                        
-                    
-
-                    
-                
-
-                ////Win/Lose condition
-                //if (player.Health <= 0)
-                //{
-                //    gameRunning = false;
-                //    Console.WriteLine("\n\nYou lose");
-                //}
-                //else if (enemy.Health <= 0)
-                //{
-                //    gameRunning = false;
-                //    Console.WriteLine("\n\nYou win");
-                //}
-            
-        
-
-        
-    
-
 
 }
 

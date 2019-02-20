@@ -11,9 +11,9 @@
             <ImageBrush ImageSource="C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\MK2011_COURTYARD_DAY.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Label x:Name="title" FontSize="60"  Content="Label" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" Width="177" Foreground="White" Height="90"/>
+        <Label x:Name="title" FontSize="60"  Content="CHAMPIONS" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="358" Foreground="#FF990B0B" Height="90"/>
         <TextBox x:Name="nameText" HorizontalAlignment="Center" Height="63" Margin="302,235,298,0" TextWrapping="Wrap" FontSize="40" TextAlignment="Center" Text="" VerticalAlignment="Top" Width="220"/>
-        <Button x:Name="startBtn" Content="Button" HorizontalAlignment="Left" Margin="359,414,0,0" VerticalAlignment="Top" Width="108" Height="61" Click="StartBtn_Click"/>
+        <Button x:Name="startBtn" FontSize="20" Content="Start" HorizontalAlignment="Left" Margin="359,414,0,0" VerticalAlignment="Top" Width="108" Height="61" Click="StartBtn_Click"/>
         <Image x:Name="redPlayer" Source="C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png" HorizontalAlignment="Left" Height="172" Margin="607,324,0,0" VerticalAlignment="Top" Width="150"/>
         <Image x:Name="bluePlayer" Source="C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\blueIdel.png" HorizontalAlignment="Left" Height="172" Margin="69,326,0,0" VerticalAlignment="Top" Width="155" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
@@ -34,9 +34,13 @@
         <Label x:Name="testLab" x:FieldModifier="public" FontSize="50" Content="Attacked" HorizontalAlignment="Left" Margin="359,151,0,0" VerticalAlignment="Top" Height="101" Width="219" Visibility="Hidden"/>
         <ProgressBar x:Name="blueHealth" HorizontalAlignment="Left" Height="10" Margin="81,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
         <ProgressBar x:Name="redHealth" HorizontalAlignment="Left" Height="10" Margin="657,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
-        <Label x:Name="blueAP" Content="Label" HorizontalAlignment="Left" Margin="47,38,0,0" VerticalAlignment="Top" Height="55" Width="46"/>
-        <Label x:Name="blockTest" Content="Label" HorizontalAlignment="Left" Margin="719,104,0,0" VerticalAlignment="Top"/>
         <Label x:Name="conditionLabel" FontSize="50" Content="DEFEAT" HorizontalAlignment="Left" Margin="331,193,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="redAPlab" FontSize="20" FontWeight="Black" Content="AP: " HorizontalAlignment="Left" Margin="657,95,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="redAP" FontSize="20" FontWeight="Black" Content="" HorizontalAlignment="Left" Margin="707,95,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="blueAPlab" FontSize="20" FontWeight="Black" Content="AP: " HorizontalAlignment="Left" Margin="80,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="blueAP" FontSize="20" FontWeight="Black" Content="" HorizontalAlignment="Left" Margin="130,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name ="redMove" FontSize="25" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="622,178,0,0" VerticalAlignment="Top" Foreground="#FFE40202"/>
+        <Button x:Name="refreshBtn" Content="Play again" HorizontalAlignment="Left" Margin="359,414,0,0" VerticalAlignment="Top" Width="117" Height="55" Click="RefreshBtn_Click" Visibility="Hidden"/>
 
     </Grid>
 </Window>
