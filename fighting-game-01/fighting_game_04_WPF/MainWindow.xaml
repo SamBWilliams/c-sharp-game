@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fighting_game_04_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="826.514">
+        Title="MainWindow" Height="543.559" Width="826.514">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\MK2011_COURTYARD_DAY.png" Stretch="UniformToFill"/>
+            <!--<ImageBrush ImageSource="MK2011_COURTYARD_DAY.png" Stretch="UniformToFill"/>-->
         </Grid.Background>
 
         <Label x:Name="title" FontSize="60"  Content="CHAMPIONS" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="358" Foreground="#FF990B0B" Height="90"/>
@@ -32,8 +33,8 @@
         <Button x:Name="chargeBtn" Content="Charge atk" HorizontalAlignment="Left" Margin="423,475,0,0" VerticalAlignment="Top" Width="75" Click="ChargeBtn_Click" Visibility="Hidden"/>
         <Button x:Name="healBtn" Content="Heal" HorizontalAlignment="Left" Margin="503,476,0,0" VerticalAlignment="Top" Width="75" Click="HealBtn_Click" Visibility="Hidden"/>
         <Label x:Name="testLab" x:FieldModifier="public" FontSize="50" Content="Attacked" HorizontalAlignment="Left" Margin="359,151,0,0" VerticalAlignment="Top" Height="101" Width="219" Visibility="Hidden"/>
-        <ProgressBar x:Name="blueHealth" HorizontalAlignment="Left" Height="10" Margin="81,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
-        <ProgressBar x:Name="redHealth" HorizontalAlignment="Left" Height="10" Margin="657,130,0,0" VerticalAlignment="Top" Width="100" Minimum="0" Maximum="100" Value="100"/>
+        <ProgressBar x:Name="blueHealth" HorizontalAlignment="Left" Height="25" Margin="81,130,0,0" VerticalAlignment="Top" Width="135" Minimum="0" Maximum="100" Value="100"/>
+        <ProgressBar x:Name="redHealth" HorizontalAlignment="Left" Height="25" Margin="622,130,0,0" VerticalAlignment="Top" Width="135" Minimum="0" Maximum="100" Value="100"/>
         <Label x:Name="conditionLabel" FontSize="50" Content="DEFEAT" HorizontalAlignment="Left" Margin="331,193,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Hidden"/>
         <Label x:Name="redAPlab" FontSize="20" FontWeight="Black" Content="AP: " HorizontalAlignment="Left" Margin="657,95,0,0" VerticalAlignment="Top"/>
         <Label x:Name="redAP" FontSize="20" FontWeight="Black" Content="" HorizontalAlignment="Left" Margin="707,95,0,0" VerticalAlignment="Top"/>
@@ -41,6 +42,7 @@
         <Label x:Name="blueAP" FontSize="20" FontWeight="Black" Content="" HorizontalAlignment="Left" Margin="130,98,0,0" VerticalAlignment="Top"/>
         <Label x:Name ="redMove" FontSize="25" FontWeight="Bold" Content="" HorizontalAlignment="Left" Margin="622,178,0,0" VerticalAlignment="Top" Foreground="#FFE40202"/>
         <Button x:Name="refreshBtn" Content="Play again" HorizontalAlignment="Left" Margin="359,414,0,0" VerticalAlignment="Top" Width="117" Height="55" Click="RefreshBtn_Click" Visibility="Hidden"/>
+        <Image x:Name="bothFighters" HorizontalAlignment="Left" Height="200" Margin="271,252,0,0" VerticalAlignment="Top" Width="331"/>
 
     </Grid>
 </Window>
