@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace fighting_game_04_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         Fighter player = new Fighter();
@@ -29,29 +27,16 @@ namespace fighting_game_04_WPF
         public MainWindow()
         {
             InitializeComponent();
-  
         }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            startBtn.Visibility = Visibility.Collapsed;
-            nameText.Visibility = Visibility.Collapsed;
-            title.Visibility = Visibility.Collapsed;
-            blueName.Visibility = Visibility.Visible;
-            redName.Visibility = Visibility.Visible;
-            attackBtn.Visibility = Visibility.Visible;
-            blockBtn.Visibility = Visibility.Visible;
-            chargeBtn.Visibility = Visibility.Visible;
-            healBtn.Visibility = Visibility.Visible;
-            bluePlayer.Visibility = Visibility.Collapsed;
-            redPlayer.Visibility = Visibility.Collapsed;
+            startBtn.Visibility = Visibility.Collapsed; nameText.Visibility = Visibility.Collapsed; title.Visibility = Visibility.Collapsed;
+            blueName.Visibility = Visibility.Visible; redName.Visibility = Visibility.Visible; attackBtn.Visibility = Visibility.Visible;
+            blockBtn.Visibility = Visibility.Visible; chargeBtn.Visibility = Visibility.Visible; healBtn.Visibility = Visibility.Visible;
+            bluePlayer.Visibility = Visibility.Collapsed; redPlayer.Visibility = Visibility.Collapsed; bothFighters.Visibility = Visibility.Visible;
             bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bothCharge.png", UriKind.Absolute));
-            bothFighters.Visibility = Visibility.Visible;
-
-            blueName.Content = nameText.Text;
-            blueAP.Content = player.AttackPower;
-            redAP.Content = enemy.AttackPower;
-
+            blueName.Content = nameText.Text; blueAP.Content = player.AttackPower; redAP.Content = enemy.AttackPower;
 
         }
 
@@ -60,8 +45,7 @@ namespace fighting_game_04_WPF
             mediaPlayer.Open(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\sounds\steelsword.mp3", UriKind.Absolute));
             mediaPlayer.Play();
             player.CurrentMove = 0;
-            
-           
+                      
             if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 0)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bothAtk.png", UriKind.Absolute));
@@ -73,8 +57,7 @@ namespace fighting_game_04_WPF
                 redMove.Content = "Attacks";
             }
             if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 1)
-            {
-                
+            {               
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bAeB.png", UriKind.Absolute));
                 player.AttackPower -= 5;
                 if(player.AttackPower < 5) { player.AttackPower = 5; }
@@ -83,14 +66,12 @@ namespace fighting_game_04_WPF
             }
             else if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 2)
             {
-                bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bAeC.png", UriKind.Absolute));
-                
+                bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bAeC.png", UriKind.Absolute));               
                 redHealth.Value -= player.AttackPower;
                 enemy.Health1 -= player.AttackPower;
                 enemy.AttackPower += 10;
                 redAP.Content = enemy.AttackPower;
-                redMove.Content = "Attack charged";
-                
+                redMove.Content = "Attack charged";                
             }
             else if (game.checkAttack(player.CurrentMove, enemy.aiMoveSelector()) == 3)
             {
@@ -146,15 +127,13 @@ namespace fighting_game_04_WPF
         }
 
         private void ChargeBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             player.CurrentMove = 2;
             player.AttackPower += 10;
             blueAP.Content = player.AttackPower;
-            //bluePlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\blueCharge.png", UriKind.Absolute));
             if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 8)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bCeA.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redAttack.png", UriKind.Absolute));
                 player.Health -= enemy.AttackPower;
                 blueHealth.Value -= enemy.AttackPower;
                 redMove.Content = "Attacks";
@@ -162,13 +141,11 @@ namespace fighting_game_04_WPF
             else if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 9)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bCeB.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
                 redMove.Content = "Blocks";
             }
             else if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 10)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bothCharge.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
                 enemy.AttackPower1 += 10;
                 redAP.Content = enemy.AttackPower1;
                 redMove.Content = "Attack charged";
@@ -177,21 +154,18 @@ namespace fighting_game_04_WPF
             else if (game.checkCharge(player.CurrentMove, enemy.aiMoveSelector()) == 11)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bCeH.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
                 redHealth.Value +=20;
                 redMove.Content = "Heals";
             }
 
             winCondition();
-            //constraints();
         }
 
         private void HealBtn_Click(object sender, RoutedEventArgs e)
         {
             player.CurrentMove = 3;
             blueHealth.Value += 20;
-           
-            //bluePlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\blueIdel.png", UriKind.Absolute));
+          
             if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 12)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bHeA.png", UriKind.Absolute));
@@ -202,41 +176,31 @@ namespace fighting_game_04_WPF
             else if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 13)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bHeB.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redBlock.png", UriKind.Absolute));
                 redMove.Content = "Blocks";
             }
             else if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 14)
             {
-                bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bHeC.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redCharge.png", UriKind.Absolute));
+                bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bHeC.png", UriKind.Absolute));              
                 enemy.AttackPower1 += 10;
                 redAP.Content = enemy.AttackPower1;
-                redMove.Content = "Attack charged";
-                
+                redMove.Content = "Attack charged";                
             }
             else if (game.checkHeal(player.CurrentMove, enemy.aiMoveSelector()) == 15)
             {
                 bothFighters.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\bothHeal.png", UriKind.Absolute));
-                //redPlayer.Source = new BitmapImage(new Uri(@"C:\c-sharp-game\fighting-game-01\fighting_game_04_WPF\Images\redIdel.png", UriKind.Absolute));
                 redHealth.Value += 20;
                 redMove.Content = "Heals";
             }
             winCondition();
-            //constraints();
         }
 
         public void collapseElements()
         {
-            attackBtn.Visibility = Visibility.Collapsed;
-            blockBtn.Visibility = Visibility.Collapsed;
-            chargeBtn.Visibility = Visibility.Collapsed;
-            healBtn.Visibility = Visibility.Collapsed;
-            blueAPlab.Visibility = Visibility.Collapsed;
-            redAPlab.Visibility = Visibility.Collapsed;
-            blueAP.Visibility = Visibility.Collapsed;
-            redAP.Visibility = Visibility.Collapsed;
+            attackBtn.Visibility = Visibility.Collapsed; blockBtn.Visibility = Visibility.Collapsed;
+            chargeBtn.Visibility = Visibility.Collapsed; healBtn.Visibility = Visibility.Collapsed;
+            blueAPlab.Visibility = Visibility.Collapsed; redAPlab.Visibility = Visibility.Collapsed;
+            blueAP.Visibility = Visibility.Collapsed; redAP.Visibility = Visibility.Collapsed;
             redMove.Visibility = Visibility.Collapsed;
-            //refreshBtn.Visibility = Visibility.Visible;
         }
 
         public void winCondition()
@@ -262,12 +226,10 @@ namespace fighting_game_04_WPF
             }
         }
 
-        
-
         void RefreshBtn_Click(object sender, RoutedEventArgs e)
         {
             //InitializeComponent();
-            
+
         }
 
     }
@@ -315,11 +277,8 @@ namespace fighting_game_04_WPF
             this.FightCominations = fightCominations;
         }
 
-
         public int checkAttack(int pMove, int eMove)
-        {
-            
-
+        {          
             if (pMove == eMove) { this.FightCominations = 0; }
             if (pMove + 1 == eMove) { this.FightCominations = 1; }
             if (pMove + 2 == eMove) { this.FightCominations = 2; }
@@ -358,8 +317,7 @@ namespace fighting_game_04_WPF
             return FightCominations;
         }
 
-        
-
+      
     }
         
 
