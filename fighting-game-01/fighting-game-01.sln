@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting-game-01", "fighting-game-01\fighting-game-01.csproj", "{67DDB796-F81D-4B1D-AC46-91BA8958D895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting-game-02-character-creation", "fighting-game-02-character-creation\fighting-game-02-character-creation.csproj", "{28AF7D95-347E-485A-A2C4-E3867488624B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting-game-03-refactored", "fighting-game-03-refactored\fighting-game-03-refactored.csproj", "{513D37E8-4A1D-425D-9B23-69B32F53400F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fighting_game_04_WPF", "fighting_game_04_WPF\fighting_game_04_WPF.csproj", "{97D583DC-082D-4DCA-8250-4A42C1DE375B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A736F1BB-59E2-449B-8FE1-27FE462CDEA4}"
+	ProjectSection(SolutionItems) = preProject
+		fighting_game_04_WPF\Images\blueAttack.png = fighting_game_04_WPF\Images\blueAttack.png
+		fighting_game_04_WPF\Images\blueBlock.png = fighting_game_04_WPF\Images\blueBlock.png
+		fighting_game_04_WPF\Images\blueCharge.png = fighting_game_04_WPF\Images\blueCharge.png
+		fighting_game_04_WPF\Images\blueIdel.png = fighting_game_04_WPF\Images\blueIdel.png
+		fighting_game_04_WPF\Images\MK2011_COURTYARD_DAY.png = fighting_game_04_WPF\Images\MK2011_COURTYARD_DAY.png
+		fighting_game_04_WPF\Images\redAttack.png = fighting_game_04_WPF\Images\redAttack.png
+		fighting_game_04_WPF\Images\redBlock.png = fighting_game_04_WPF\Images\redBlock.png
+		fighting_game_04_WPF\Images\redCharge.png = fighting_game_04_WPF\Images\redCharge.png
+		fighting_game_04_WPF\Images\redIdel.png = fighting_game_04_WPF\Images\redIdel.png
+		fighting_game_04_WPF\Images\sprites.png = fighting_game_04_WPF\Images\sprites.png
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67DDB796-F81D-4B1D-AC46-91BA8958D895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67DDB796-F81D-4B1D-AC46-91BA8958D895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67DDB796-F81D-4B1D-AC46-91BA8958D895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67DDB796-F81D-4B1D-AC46-91BA8958D895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28AF7D95-347E-485A-A2C4-E3867488624B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28AF7D95-347E-485A-A2C4-E3867488624B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28AF7D95-347E-485A-A2C4-E3867488624B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28AF7D95-347E-485A-A2C4-E3867488624B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513D37E8-4A1D-425D-9B23-69B32F53400F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D583DC-082D-4DCA-8250-4A42C1DE375B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45027632-733C-47E8-81F3-324077F268F1}
+	EndGlobalSection
+EndGlobal
